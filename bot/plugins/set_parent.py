@@ -11,7 +11,7 @@ def _set_parent(client, message):
   if len(message.command) > 1:
     link = message.command[1]
     if not 'clear' in link:
-      sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**', quote=True)
+      sent_message = message.reply_text('🕵️**.ဖိုဒါလင့်ကိုစစ်ဆေးနေပါသည်...**', quote=True)
       gdrive = GoogleDrive(user_id)
       try:
         result, file_id = gdrive.checkFolderLink(link)
