@@ -49,7 +49,7 @@ def _download(client, message):
 @Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
 def _telegram_file(client, message):
   user_id = message.from_user.id
-  sent_message = message.reply_text('🕵️**Checking File...**', quote=True)
+  sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**', quote=True)
   if message.document:
     file = message.document
   elif message.video:
