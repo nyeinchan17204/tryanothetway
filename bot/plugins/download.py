@@ -13,7 +13,7 @@ from pyrogram.errors import FloodWait, RPCError
 def _download(client, message):
   user_id = message.from_user.id
   if not message.media:
-    sent_message = message.reply_text('🕵️**Checking link...**', quote=True)
+    sent_message = message.reply_text('🕵️**..ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**', quote=True)
     if message.command:
       link = message.command[1]
     else:
@@ -72,7 +72,7 @@ def _telegram_file(client, message):
 def _ytdl(client, message):
   user_id = message.from_user.id
   if len(message.command) > 1:
-    sent_message = message.reply_text('🕵️**Checking Link...**', quote=True)
+    sent_message = message.reply_text('🕵️**..ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**', quote=True)
     link = message.command[1]
     LOGGER.info(f'YTDL:{user_id}: {link}')
     sent_message.edit(Messages.DOWNLOADING.format(link))
