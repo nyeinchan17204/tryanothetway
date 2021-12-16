@@ -22,7 +22,7 @@ def _download(client, message):
       sent_message.edit(Messages.CLONING.format(link))
       LOGGER.info(f'Copy:{user_id}: {link}')
       msg = GoogleDrive(user_id).clone(link)
-      sent_message.edit(msg)
+      sent_message.reply_text(msg)
     else:
       if '|' in link:
         link, filename = link.split('|')
@@ -37,13 +37,13 @@ def _download(client, message):
       sent_message.edit(Messages.DOWNLOADING.format(link))
       result, file_path = download_file(link, dl_path)
       if result == True:
-        sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
+        sent_message.reply_text(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
         msg = GoogleDrive(user_id).upload_file(file_path)
         sent_message.edit(msg)
         LOGGER.info(f'Deleteing: {file_path}')
         os.remove(file_path)
       else:
-        sent_message.edit(Messages.DOWNLOAD_ERROR.format(file_path, link))
+        sent_message.reply_text(Messages.DOWNLOAD_ERROR.format(file_path, link))
 
 
 @Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
@@ -60,9 +60,9 @@ def _telegram_file(client, message):
   LOGGER.info(f'Download:{user_id}: {file.file_id}')
   try:
     file_path = message.download(file_name=DOWNLOAD_DIRECTORY)
-    sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
+    sent_message.reply_text(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
     msg = GoogleDrive(user_id).upload_file(file_path, file.mime_type)
-    sent_message.edit(msg)
+    sent_message.reply_text(msg)
   except RPCError:
     sent_message.edit(Messages.WENT_WRONG)
   LOGGER.info(f'Deleteing: {file_path}')
@@ -78,7 +78,7 @@ def _ytdl(client, message):
     sent_message.edit(Messages.DOWNLOADING.format(link))
     result, file_path = utube_dl(link)
     if result:
-      sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
+      sent_message.reply_text(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
       msg = GoogleDrive(user_id).upload_file(file_path)
       sent_message.edit(msg)
       LOGGER.info(f'Deleteing: {file_path}')
