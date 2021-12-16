@@ -1,7 +1,6 @@
 import os
 import wget
 import glob
-import youtube_dl
 from pySmartDL import SmartDL
 from urllib.error import HTTPError
 from bot import DOWNLOAD_DIRECTORY, LOGGER
