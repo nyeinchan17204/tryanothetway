@@ -43,7 +43,7 @@ def _download(client, message):
         LOGGER.info(f'Deleteing: {file_path}')
         os.remove(file_path)
       else:
-        sent_message.reply_text(Messages.DOWNLOAD_ERROR.format(file_path, link))
+        sent_message.edit(Messages.DOWNLOAD_ERROR.format(file_path, link))
 
 
 @Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
